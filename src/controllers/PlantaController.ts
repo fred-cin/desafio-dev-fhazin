@@ -30,7 +30,6 @@ export class PlantaController {
   }
 
   async findAll(req: Request, res: Response): Promise<Response> {
-	  try {
 		const { luminosidade, petFriendly } = req.query;
 
 		const filters: any = {};
@@ -45,10 +44,6 @@ export class PlantaController {
 
 		const plantas = await repository.findAll(filters);
 		return res.json(plantas);
-  } catch (error) {
-    console.error("Error in findAll:", error);
-    return res.status(500).json({ error: "Erro interno do servidor." });
-  }
 }
 
   async findById(req: Request, res: Response): Promise<Response> {
