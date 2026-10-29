@@ -30,21 +30,26 @@ export class PlantaController {
   }
 
   async findAll(req: Request, res: Response): Promise<Response> {
-    const { luminosidade, petFriendly } = req.query;
+	  try {
+		const { luminosidade, petFriendly } = req.query;
 
-    const filters: any = {};
+		const filters: any = {};
 
-    if (luminosidade && Object.values(Luminosidade).includes(luminosidade as Luminosidade)) {
-      filters.luminosidade = luminosidade as Luminosidade;
-    }
+		if (luminosidade && Object.values(Luminosidade).includes(luminosidade as Luminosidade)) {
+		  filters.luminosidade = luminosidade as Luminosidade;
+		}
 
-    if (petFriendly !== undefined) {
-      filters.petFriendly = petFriendly === "true";
-    }
+		if (petFriendly !== undefined) {
+		  filters.petFriendly = petFriendly === "true";
+		}
 
-    const plantas = await repository.findAll(filters);
-    return res.json(plantas);
+		const plantas = await repository.findAll(filters);
+		return res.json(plantas);
+  } catch (error) {
+    console.error("Error in findAll:", error);
+    return res.status(500).json({ error: "Erro interno do servidor." });
   }
+}
 
   async findById(req: Request, res: Response): Promise<Response> {
     const id = Number(req.params.id);

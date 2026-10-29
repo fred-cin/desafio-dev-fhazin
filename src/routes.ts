@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { PlantaController } from "./controllers/PlantaController";
+import {Router} from "express";
+import {PlantaController} from "./controllers/PlantaController";
 
 const routes = Router();
 const plantaController = new PlantaController();
@@ -13,4 +13,5 @@ routes.put("/plantas/:id", (req, res) => plantaController.update(req, res));
 routes.delete("/plantas/:id", (req, res) => plantaController.delete(req, res));
 routes.post("/plantas/:id/vender", (req, res) => plantaController.vender(req, res));
 
-export { routes };
+export {routes};
+export default routes;
